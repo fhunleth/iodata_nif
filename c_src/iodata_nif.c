@@ -49,11 +49,14 @@ static ERL_NIF_TERM nif_inspect_iovec(ErlNifEnv *env, int argc, const ERL_NIF_TE
     return enif_make_uint(env, vec.size);
 }
 
+#define FLAGS 0
+//#define FLAGS ERL_NIF_DIRTY_JOB_IO_BOUND
+
 static ErlNifFunc nif_funcs[] =
 {
-    {"nif_inspect_binary", 1, nif_inspect_binary, ERL_NIF_DIRTY_JOB_IO_BOUND},
-    {"nif_inspect_iolist_as_binary", 1, nif_inspect_iolist_as_binary, ERL_NIF_DIRTY_JOB_IO_BOUND},
-    {"nif_inspect_iovec", 1, nif_inspect_iovec, ERL_NIF_DIRTY_JOB_IO_BOUND}
+    {"nif_inspect_binary", 1, nif_inspect_binary, FLAGS},
+    {"nif_inspect_iolist_as_binary", 1, nif_inspect_iolist_as_binary, FLAGS},
+    {"nif_inspect_iovec", 1, nif_inspect_iovec, FLAGS}
 };
 
 ERL_NIF_INIT(Elixir.IODataNIF, nif_funcs, nif_load, NULL, NULL, nif_unload)
